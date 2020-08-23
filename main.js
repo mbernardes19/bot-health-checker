@@ -26,29 +26,34 @@ void (async function () {
   })()
 
   let messageAnswered = false;
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('DENTRO DA PROMISE', messageAnswered)
+        if (messageAnswered) {
+            messageAnswered = false
+            resolve()
+        } else {
+            reject()
+        }
+    }, 30000)
+});
 
-  setInterval(() => {
-    airgram.api.sendMessage({chatId: 1206925936, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-    .then(res => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (messageAnswered) {
-                    messageAnswered = false
-                    resolve()
-                } else {
-                    reject()
-                }
-            }, 30000)
-        });
-    })
-    .then(res => console.log('DEU BOM'))
-    .catch(err => {
+  setInterval(async () => {
+      try {
+        console.log('COMECO', messageAnswered)
+        await airgram.api.sendMessage({chatId: 1206925936, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promise
+        console.log('DEU BOM')
+        console.log('FIM', messageAnswered)
+      } catch (err) {
         bot.telegram.sendMessage(721557882, 'Deu ruim')
         console.log('DEU RUIM')
-    })
-}, 60000)
+        console.log('RUIM', messageAnswered)
+      }
+    }, 60000)
 
 airgram.on('updateNewMessage', (ctx, next) => {
+
     if (!ctx.update.message.isOutgoing) {
         messageAnswered = true;
         console.log('RESPOSTA',ctx.update.message.content.text)
