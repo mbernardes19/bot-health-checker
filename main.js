@@ -7,7 +7,7 @@ const bot = new Telegraf('1383007158:AAHhiSvbgH6jYnwlH2c4_PZnIYH-uhTKnl8')
 const airgram = new Airgram({
   apiId: 1485371,
   apiHash: "662c661df7d0b41601f6cb8ae2ef35d6",
-  command: "./libtdjson.dylib",
+  command: "./libtdjson.so",
   logVerbosityLevel: 0
 })
 
