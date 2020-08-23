@@ -25,12 +25,26 @@ void (async function () {
     console.log('[My chats] ', chats)
   })()
 
-  let messageAnswered = false;
-  const promise = new Promise((resolve, reject) => {
+  let messageSempreRicoAnswered = false;
+  let messageTraderInfalivelAnswered = false;
+
+  const promiseTraderInfalivel = new Promise((resolve, reject) => {
     setTimeout(() => {
-        console.log('DENTRO DA PROMISE', messageAnswered)
-        if (messageAnswered) {
-            messageAnswered = false
+        console.log('DENTRO DA PROMISE', messageTraderInfalivelAnswered)
+        if (messageTraderInfalivelAnswered) {
+            messageTraderInfalivelAnswered = false
+            resolve()
+        } else {
+            reject()
+        }
+    }, 30000)
+});
+
+const promiseSempreRico = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('DENTRO DA PROMISE', messageSempreRicoAnswered)
+        if (messageSempreRicoAnswered) {
+            messageSempreRicoAnswered = false
             resolve()
         } else {
             reject()
@@ -40,23 +54,31 @@ void (async function () {
 
   setInterval(async () => {
       try {
-        console.log('COMECO', messageAnswered)
         await airgram.api.sendMessage({chatId: 1206925936, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-        await promise
+        await promiseTraderInfalivel
+        await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRico
         console.log('DEU BOM')
-        console.log('FIM', messageAnswered)
       } catch (err) {
-        bot.telegram.sendMessage(721557882, 'Deu ruim')
-        console.log('DEU RUIM')
-        console.log('RUIM', messageAnswered)
+        if (!messageTraderInfalivelAnswered) {
+            bot.telegram.sendMessage(721557882, 'Trader Infalível não respondendo')
+            console.log('DEU RUIM')
+        }
+        if (!messageSempreRicoAnswered) {
+            bot.telegram.sendMessage(721557882, 'Sempre Rico não respondendo')
+            console.log('DEU RUIM')
+        }
       }
-    }, 60000)
+    }, 600000)
 
 airgram.on('updateNewMessage', (ctx, next) => {
-
     if (!ctx.update.message.isOutgoing) {
-        messageAnswered = true;
-        console.log('RESPOSTA',ctx.update.message.content.text)
+        if (ctx.update.message.chatId === 1206925936) {
+            messageTraderInfalivelAnswered = false
+        }
+        if (ctx.update.message.chatId === 1122807041) {
+            messageSempreRicoAnswered = false
+        }
     }
     return next()
 })
