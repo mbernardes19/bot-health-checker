@@ -74,10 +74,10 @@ const promiseSempreRico = new Promise((resolve, reject) => {
 airgram.on('updateNewMessage', (ctx, next) => {
     if (!ctx.update.message.isOutgoing) {
         if (ctx.update.message.chatId === 1206925936) {
-            messageTraderInfalivelAnswered = false
+            messageTraderInfalivelAnswered = true
         }
         if (ctx.update.message.chatId === 1122807041) {
-            messageSempreRicoAnswered = false
+            messageSempreRicoAnswered = true
         }
     }
     return next()
