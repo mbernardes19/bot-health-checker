@@ -39,6 +39,15 @@ void (async function () {
         if (!messageTraderInfalivelAnswered) {
             bot.telegram.sendMessage(721557882, 'Trader Infalível não respondendo')
             console.log('DEU RUIM TRADER INFALIVEL')
+            try {
+                console.log('Revivendo Trader Infalível')
+                await axios.get('http://metodotraderinfalivel.kinghost.net:21571/revive')
+                await bot.telegram.sendMessage(721557882, 'Trader Infalível reviveu')
+                console.log('Trader Infalível reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Trader Infalível não conseguiu reviver')
+                console.log('Erro ao reviver Trader Infalível', err)
+            }
         }
       }
 
