@@ -1,6 +1,7 @@
 const { Telegraf } = require('telegraf')
 const { Airgram, Auth, prompt } = require('airgram')
 const app = require('express')()
+const axios = require('axios').default
 
 const bot = new Telegraf('1383007158:AAHhiSvbgH6jYnwlH2c4_PZnIYH-uhTKnl8')
 
@@ -28,55 +29,72 @@ void (async function () {
   let messageSempreRicoAnswered = false;
   let messageTraderInfalivelAnswered = false;
 
-  const promiseTraderInfalivel = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        console.log('DENTRO DA PROMISE', messageTraderInfalivelAnswered)
-        if (messageTraderInfalivelAnswered) {
-            messageTraderInfalivelAnswered = false
-            resolve()
-        } else {
-            reject()
-        }
-    }, 30000)
-});
-
-const promiseSempreRico = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        console.log('DENTRO DA PROMISE', messageSempreRicoAnswered)
-        if (messageSempreRicoAnswered) {
-            messageSempreRicoAnswered = false
-            resolve()
-        } else {
-            reject()
-        }
-    }, 30000)
-});
-
   setInterval(async () => {
+      console.log('COMECOU A ENVIAR MENSAGENS')
       try {
         await airgram.api.sendMessage({chatId: 1206925936, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-        await promiseTraderInfalivel
-        await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-        await promiseSempreRico
-        console.log('DEU BOM')
+        await promiseTraderInfalivel()
+        console.log('DEU BOM TRADER INFALIVEL')
       } catch (err) {
         if (!messageTraderInfalivelAnswered) {
             bot.telegram.sendMessage(721557882, 'Trader Infalível não respondendo')
-            console.log('DEU RUIM')
+            console.log('DEU RUIM TRADER INFALIVEL')
         }
+      }
+
+      try {
+        await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRico()
+        console.log('DEU BOM SEMPRE RICO')
+      } catch (err) {
         if (!messageSempreRicoAnswered) {
             bot.telegram.sendMessage(721557882, 'Sempre Rico não respondendo')
-            console.log('DEU RUIM')
+            console.log('DEU RUIM SEMPRE RICO')
+            try {
+                console.log('Revivendo Sempre Rico')
+                await axios.get('http://metodosemprerico.kinghost.net:21563/revive')
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico reviveu')
+                console.log('Sempre Rico reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico não conseguiu reviver')
+                console.log('Erro ao reviver Sempre Rico', err)
+            }
         }
       }
     }, 600000)
 
+    const promiseTraderInfalivel = () => (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('DENTRO DA PROMISE', messageTraderInfalivelAnswered)
+            if (messageTraderInfalivelAnswered) {
+                messageTraderInfalivelAnswered = false
+                resolve()
+            } else {
+                reject()
+            }
+        }, 30000)
+    }));
+    
+    const promiseSempreRico = () => (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('DENTRO DA PROMISE', messageSempreRicoAnswered)
+            if (messageSempreRicoAnswered) {
+                messageSempreRicoAnswered = false
+                resolve()
+            } else {
+                reject()
+            }
+        }, 30000)
+    }));
+
 airgram.on('updateNewMessage', (ctx, next) => {
     if (!ctx.update.message.isOutgoing) {
-        if (ctx.update.message.chatId === 1206925936) {
+        if (ctx.update.message.chatId == 1206925936) {
+            console.log('RECEBENDO RESPOSTA DE TRADER INFALIVEL')
             messageTraderInfalivelAnswered = true
         }
-        if (ctx.update.message.chatId === 1122807041) {
+        if (ctx.update.message.chatId == 1122807041) {
+            console.log('RECEBENDO RESPOSTA DE TRADER SEMPRE RICO')
             messageSempreRicoAnswered = true
         }
     }

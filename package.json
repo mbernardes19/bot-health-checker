@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "airgram": "^3.1.1",
+    "axios": "^0.20.0",
     "express": "^4.17.1",
     "node-gyp": "^7.1.0",
     "telegraf": "^3.38.0"
