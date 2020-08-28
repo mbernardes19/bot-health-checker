@@ -37,7 +37,7 @@ void (async function () {
         console.log('DEU BOM TRADER INFALIVEL')
       } catch (err) {
         if (!messageTraderInfalivelAnswered) {
-            bot.telegram.sendMessage(721557882, 'Trader Infalível não respondendo')
+            await bot.telegram.sendMessage(721557882, 'Trader Infalível não respondendo')
             console.log('DEU RUIM TRADER INFALIVEL')
             try {
                 console.log('Revivendo Trader Infalível')
@@ -57,7 +57,7 @@ void (async function () {
         console.log('DEU BOM SEMPRE RICO')
       } catch (err) {
         if (!messageSempreRicoAnswered) {
-            bot.telegram.sendMessage(721557882, 'Sempre Rico não respondendo')
+            await bot.telegram.sendMessage(721557882, 'Sempre Rico não respondendo')
             console.log('DEU RUIM SEMPRE RICO')
             try {
                 console.log('Revivendo Sempre Rico')
