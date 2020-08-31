@@ -32,7 +32,7 @@ void (async function () {
   setInterval(async () => {
       console.log('COMECOU A ENVIAR MENSAGENS')
       try {
-        await airgram.api.sendMessage({chatId: 1206925936, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await airgram.api.sendMessage({chatId: 980218936, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
         await promiseTraderInfalivel()
         console.log('DEU BOM TRADER INFALIVEL')
       } catch (err) {
