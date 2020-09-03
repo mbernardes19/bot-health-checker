@@ -124,13 +124,12 @@ bot.launch()
 
 airgram.on('updateNewMessage', (ctx, next) => {
     if (!ctx.update.message.isOutgoing) {
-        if (ctx.update.message.chatId == 1206925936 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
+        if (ctx.update.message.chatId == 980218936 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE TRADER INFALIVEL')
             messageTraderInfalivelAnswered = true
         }
-        if (ctx.update.message.chatId != 1122807041 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
+        if (ctx.update.message.chatId == 1122807041 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE TRADER SEMPRE RICO')
-            console.log(ctx.update.message.chatId)
             messageSempreRicoAnswered = true
         }
     }
