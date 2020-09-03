@@ -29,6 +29,32 @@ void (async function () {
   let messageSempreRicoAnswered = false;
   let messageTraderInfalivelAnswered = false;
 
+  bot.command('mti', async ctx => {
+    try {
+        console.log('Revivendo Trader Infalível MANUALMENTE')
+        await axios.get('http://metodotraderinfalivel.kinghost.net:21571/revive')
+        await ctx.reply('Trader Infalível reviveu MANUALMENTE')
+        console.log('Trader Infalível reviveu')
+    } catch (err) {
+        await ctx.reply('Trader Infalível não conseguiu reviver MANUALMENTE')
+        console.log('Erro ao reviver Trader Infalível MANUALMENTE', err)
+    }
+})
+
+bot.command('msr', async ctx => {
+    try {
+        console.log('Revivendo Sempre Rico MANUALMENTE')
+        await axios.get('http://metodosemprerico.kinghost.net:21563/revive')
+        await ctx.reply('Sempre Rico reviveu MANUALMENTE')
+        console.log('Sempre Rico reviveu MANUALMENTE')
+    } catch (err) {
+        await ctx.reply('Sempre Rico não conseguiu reviver MANUALMENTE')
+        console.log('Erro ao reviver Sempre Rico MANUALMENTE', err)
+    }
+})
+
+bot.launch()
+
   setInterval(async () => {
       console.log('COMECOU A ENVIAR MENSAGENS')
       try {
@@ -95,30 +121,6 @@ void (async function () {
             }
         }, 30000)
     }));
-
-    bot.command('mti', async ctx => {
-        try {
-            console.log('Revivendo Trader Infalível MANUALMENTE')
-            await axios.get('http://metodotraderinfalivel.kinghost.net:21571/revive')
-            await bot.telegram.sendMessage(721557882, 'Trader Infalível reviveu MANUALMENTE')
-            console.log('Trader Infalível reviveu')
-        } catch (err) {
-            await bot.telegram.sendMessage(721557882, 'Trader Infalível não conseguiu reviver MANUALMENTE')
-            console.log('Erro ao reviver Trader Infalível MANUALMENTE', err)
-        }
-    })
-
-    bot.command('msr', async ctx => {
-        try {
-            console.log('Revivendo Sempre Rico MANUALMENTE')
-            await axios.get('http://metodosemprerico.kinghost.net:21563/revive')
-            await bot.telegram.sendMessage(721557882, 'Sempre Rico reviveu MANUALMENTE')
-            console.log('Sempre Rico reviveu MANUALMENTE')
-        } catch (err) {
-            await bot.telegram.sendMessage(721557882, 'Sempre Rico não conseguiu reviver MANUALMENTE')
-            console.log('Erro ao reviver Sempre Rico MANUALMENTE', err)
-        }
-    })
 
 airgram.on('updateNewMessage', (ctx, next) => {
     if (!ctx.update.message.isOutgoing) {
