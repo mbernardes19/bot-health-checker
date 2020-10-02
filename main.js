@@ -28,6 +28,7 @@ void (async function () {
 
   let messageSempreRicoAnswered = false;
   let messageTraderInfalivelAnswered = false;
+  let messageWinOuWinAnswered = false;
 
   bot.command('mti', async ctx => {
     try {
@@ -96,7 +97,27 @@ bot.launch()
             }
         }
       }
-    }, 600000)
+
+      try {
+        await airgram.api.sendMessage({chatId: 1148955990, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseWinOuWin()
+        console.log('DEU BOM WIN OU WIN')
+      } catch (err) {
+        if (!messageSempreRicoAnswered) {
+            await bot.telegram.sendMessage(721557882, 'Win Ou Win não respondendo')
+            console.log('DEU RUIM WIN OU WIN')
+            try {
+                console.log('Revivendo Win ou Win')
+                await axios.get('http://metodosemprerico.kinghost.net:21563/revive')
+                await bot.telegram.sendMessage(721557882, 'Win ou Win reviveu')
+                console.log('Win ou Win reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Win ou Win não conseguiu reviver')
+                console.log('Erro ao reviver Win ou Win', err)
+            }
+        }
+      }
+    }, 300000)
 
     const promiseTraderInfalivel = () => (new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -122,6 +143,19 @@ bot.launch()
         }, 30000)
     }));
 
+    const promiseWinOuWin = () => (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('DENTRO DA PROMISE', messageWinOuWinAnswered)
+            if (messageWinOuWinAnswered) {
+                messageWinOuWinAnswered = false
+                resolve()
+            } else {
+                reject()
+            }
+        }, 30000)
+    }));
+
+
 airgram.on('updateNewMessage', (ctx, next) => {
     if (!ctx.update.message.isOutgoing) {
         if (ctx.update.message.chatId == 980218936 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
@@ -131,6 +165,10 @@ airgram.on('updateNewMessage', (ctx, next) => {
         if (ctx.update.message.chatId == 1122807041 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE TRADER SEMPRE RICO')
             messageSempreRicoAnswered = true
+        }
+        if (ctx.update.message.chatId == 1148955990 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
+            console.log('RECEBENDO RESPOSTA DE WIN OU WIN')
+            messageWinOuWinAnswered = true
         }
     }
     return next()
