@@ -99,7 +99,7 @@ bot.launch()
       }
 
       try {
-        await airgram.api.sendMessage({chatId: 1148955990, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await airgram.api.sendMessage({chatId: 1282624834, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
         await promiseWinOuWin()
         console.log('DEU BOM WIN OU WIN')
       } catch (err) {
@@ -166,7 +166,7 @@ airgram.on('updateNewMessage', (ctx, next) => {
             console.log('RECEBENDO RESPOSTA DE TRADER SEMPRE RICO')
             messageSempreRicoAnswered = true
         }
-        if (ctx.update.message.chatId == 1148955990 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
+        if (ctx.update.message.chatId == 1282624834 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE WIN OU WIN')
             messageWinOuWinAnswered = true
         }
