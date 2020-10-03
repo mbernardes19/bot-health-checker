@@ -106,15 +106,6 @@ bot.launch()
         if (!messageSempreRicoAnswered) {
             await bot.telegram.sendMessage(721557882, 'Win Ou Win não respondendo')
             console.log('DEU RUIM WIN OU WIN')
-            try {
-                console.log('Revivendo Win ou Win')
-                await axios.get('http://metodosemprerico.kinghost.net:21563/revive')
-                await bot.telegram.sendMessage(721557882, 'Win ou Win reviveu')
-                console.log('Win ou Win reviveu')
-            } catch (err) {
-                await bot.telegram.sendMessage(721557882, 'Win ou Win não conseguiu reviver')
-                console.log('Erro ao reviver Win ou Win', err)
-            }
         }
       }
     }, 300000)
