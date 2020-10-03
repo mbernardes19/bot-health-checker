@@ -120,7 +120,7 @@ bot.launch()
             console.log('DEU RUIM WIN OU WIN')
             try {
                 console.log('Revivendo Win ou Win')
-                await axios.get('https://serene-dusk-48270.herokuapp.com/revive')
+                await axios.get('https://4e7620c23911.ngrok.io/revive')
                 await bot.telegram.sendMessage(721557882, 'Win ou Win reviveu')
                 console.log('Win ou Win reviveu')
             } catch (err) {
