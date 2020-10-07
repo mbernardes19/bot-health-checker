@@ -57,7 +57,7 @@ bot.command('msr', async ctx => {
 bot.command('ww', async ctx => {
     try {
         console.log('Revivendo Win ou Win MANUALMENTE')
-        await axios.get('https://47a67247852a.ngrok.io/revive')
+        await axios.get('https://bb63e0a0cdff.ngrok.io/revive')
         await ctx.reply('Win ou Win reviveu MANUALMENTE')
         console.log('Win ou Win reviveu MANUALMENTE')
     } catch (err) {
@@ -120,7 +120,7 @@ bot.launch()
             console.log('DEU RUIM WIN OU WIN')
             try {
                 console.log('Revivendo Win ou Win')
-                await axios.get('https://47a67247852a.ngrok.io/revive')
+                await axios.get('https://bb63e0a0cdff.ngrok.io/revive')
                 await bot.telegram.sendMessage(721557882, 'Win ou Win reviveu')
                 console.log('Win ou Win reviveu')
             } catch (err) {
