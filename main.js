@@ -2,6 +2,9 @@ const { Telegraf } = require('telegraf')
 const { Airgram, Auth, prompt } = require('airgram')
 const app = require('express')()
 const axios = require('axios').default
+const mysql = require('mysql2');
+const util = require('util');
+const dotenv = require('dotenv').config()
 
 const bot = new Telegraf('1383007158:AAHhiSvbgH6jYnwlH2c4_PZnIYH-uhTKnl8')
 
@@ -17,7 +20,37 @@ airgram.use(new Auth({
   phoneNumber: () => prompt('Insira por favor seu telefone no formato internacional:')
 }))
 
+let connection;
+
 void (async function () {
+    function handleDisconnect() {
+        connection = mysql.createConnection({
+            host: process.env.DB_HOST,
+            database: process.env.DB_DATABASE,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            dateStrings: true
+        })
+                                                     // the old one cannot be reused.
+    
+        connection.connect(function(err) {              // The server is either down
+          if(err) {                                     // or restarting (takes a while sometimes).
+            console.log('error when connecting to db:', err);
+            setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+          }                                     // to avoid a hot loop, and to allow our node script to
+        });                                     // process asynchronous requests in the meantime.
+                                                // If you're also serving http, display a 503 error.
+        connection.on('error', function(err) {
+          if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+            handleDisconnect();                         // lost due to either server restart, or a
+          } else {                                      // connnection idle timeout (the wait_timeout
+            throw err;                                  // server variable configures this)
+          }
+        });
+      }
+    
+      handleDisconnect();
+
     const { response: chats } = await airgram.api.getChats({
       limit: 10,
       offsetChatId: 0,
@@ -55,9 +88,13 @@ bot.command('msr', async ctx => {
 })
 
 bot.command('ww', async ctx => {
+    const query = util.promisify(connection.query).bind(connection)
+    const [response] = await query(`select url from URLs where id=1`);
+    const url = response.url
+    console.log(url)
     try {
         console.log('Revivendo Win ou Win MANUALMENTE')
-        await axios.get('https://596d745bcf4d.ngrok.io/revive')
+        await axios.get(`${url}/revive`)
         await ctx.reply('Win ou Win reviveu MANUALMENTE')
         console.log('Win ou Win reviveu MANUALMENTE')
     } catch (err) {
@@ -111,6 +148,10 @@ bot.launch()
       }
 
       try {
+        const query = util.promisify(connection.query).bind(connection)
+        const [response] = await query(`select url from URLs where id=1`);
+        const url = response.url
+        console.log(url)
         await airgram.api.sendMessage({chatId: 1282624834, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
         await promiseWinOuWin()
         console.log('DEU BOM WIN OU WIN')
@@ -120,7 +161,7 @@ bot.launch()
             console.log('DEU RUIM WIN OU WIN')
             try {
                 console.log('Revivendo Win ou Win')
-                await axios.get('https://596d745bcf4d.ngrok.io/revive')
+                await axios.get(`${url}/revive`)
                 await bot.telegram.sendMessage(721557882, 'Win ou Win reviveu')
                 console.log('Win ou Win reviveu')
             } catch (err) {
