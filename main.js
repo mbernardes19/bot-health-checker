@@ -22,6 +22,31 @@ airgram.use(new Auth({
 
 let connection;
 
+function handleDisconnect() {
+    connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        database: process.env.DB_DATABASE,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        dateStrings: true
+    })
+
+    connection.connect(function(err) {             
+      if(err) {                                     
+        console.log('error when connecting to db:', err);
+        setTimeout(handleDisconnect, 2000); 
+      }                                    
+    });                                     
+                                            
+    connection.on('error', function(err) {
+      if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+        handleDisconnect();                         
+      } else {                                      
+        throw err;                                  
+      }
+    });
+  }
+
 void (async function () {
     const { response: chats } = await airgram.api.getChats({
       limit: 10,
@@ -78,31 +103,6 @@ bot.command('ww', async ctx => {
 bot.launch()
 
   setInterval(async () => {
-    function handleDisconnect() {
-        connection = mysql.createConnection({
-            host: process.env.DB_HOST,
-            database: process.env.DB_DATABASE,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            dateStrings: true
-        })
-    
-        connection.connect(function(err) {             
-          if(err) {                                     
-            console.log('error when connecting to db:', err);
-            setTimeout(handleDisconnect, 2000); 
-          }                                    
-        });                                     
-                                                
-        connection.on('error', function(err) {
-          if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
-            handleDisconnect();                         
-          } else {                                      
-            throw err;                                  
-          }
-        });
-      }
-    
       handleDisconnect();
 
       console.log('COMECOU A ENVIAR MENSAGENS')
@@ -146,10 +146,11 @@ bot.launch()
         }
       }
 
+      let url;
       try {
         const query = util.promisify(connection.query).bind(connection)
         const [response] = await query(`select url from URLs where id=1`);
-        const url = response.url
+        url = response.url
         console.log(url)
         await airgram.api.sendMessage({chatId: 1282624834, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
         await promiseWinOuWin()
