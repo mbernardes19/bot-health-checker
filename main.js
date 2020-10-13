@@ -181,7 +181,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 30000)
+        }, 10000)
     }));
     
     const promiseSempreRico = () => (new Promise((resolve, reject) => {
@@ -193,7 +193,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 30000)
+        }, 10000)
     }));
 
     const promiseWinOuWin = () => (new Promise((resolve, reject) => {
@@ -205,7 +205,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 30000)
+        }, 10000)
     }));
 
 
