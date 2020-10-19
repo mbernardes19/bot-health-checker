@@ -75,7 +75,7 @@ void (async function () {
 bot.command('msr', async ctx => {
     try {
         console.log('Revivendo Sempre Rico MANUALMENTE')
-        await axios.get('http://metodosemprerico.kinghost.net:21563/revive')
+        await axios.get('http://bot.sosvestibular.com/Health/revive')
         await ctx.reply('Sempre Rico reviveu MANUALMENTE')
         console.log('Sempre Rico reviveu MANUALMENTE')
     } catch (err) {
@@ -136,7 +136,7 @@ bot.launch()
             console.log('DEU RUIM SEMPRE RICO')
             try {
                 console.log('Revivendo Sempre Rico')
-                await axios.get('http://metodosemprerico.kinghost.net:21563/revive')
+                await axios.get('http://bot.sosvestibular.com/Health/revive')
                 await bot.telegram.sendMessage(721557882, 'Sempre Rico reviveu')
                 console.log('Sempre Rico reviveu')
             } catch (err) {
