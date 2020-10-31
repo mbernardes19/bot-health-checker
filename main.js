@@ -59,6 +59,7 @@ void (async function () {
   let messageSempreRicoAnswered = false;
   let messageTraderInfalivelAnswered = false;
   let messageWinOuWinAnswered = false;
+  let messageSempreRicoTestAnswered = false;
 
   bot.command('mti', async ctx => {
     try {
@@ -146,6 +147,26 @@ bot.launch()
         }
       }
 
+      try {
+        await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRicoTeste()
+        console.log('DEU BOM TESTE SEMPRE RICO')
+      } catch (err) {
+        if (!messageSempreRicoAnswered) {
+            await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico não respondendo')
+            console.log('DEU RUIM TESTE SEMPRE RICO')
+            try {
+                console.log('Revivendo Teste Sempre Rico')
+                await axios.get('http://bot.sosvestibular.com/HealthTeste/revive')
+                await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico reviveu')
+                console.log('Teste Sempre Rico reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico não conseguiu reviver')
+                console.log('Erro ao reviver Teste Sempre Rico', err)
+            }
+        }
+      }
+
       let url;
       try {
         const query = util.promisify(connection.query).bind(connection)
@@ -196,6 +217,18 @@ bot.launch()
         }, 10000)
     }));
 
+    const promiseSempreRicoTeste = () => (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('DENTRO DA PROMISE', messageSempreRicoTestAnswered)
+            if (messageSempreRicoTestAnswered) {
+                messageSempreRicoTestAnswered = false
+                resolve()
+            } else {
+                reject()
+            }
+        }, 10000)
+    }));
+
     const promiseWinOuWin = () => (new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('DENTRO DA PROMISE', messageWinOuWinAnswered)
@@ -218,6 +251,10 @@ airgram.on('updateNewMessage', (ctx, next) => {
         if (ctx.update.message.chatId == 1122807041 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE TRADER SEMPRE RICO')
             messageSempreRicoAnswered = true
+        }
+        if (ctx.update.message.chatId == 1268417828 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
+            console.log('RECEBENDO RESPOSTA DE TESTE TRADER SEMPRE RICO')
+            messageSempreRicoTestAnswered = true
         }
         if (ctx.update.message.chatId == 1282624834 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE WIN OU WIN')
