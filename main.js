@@ -148,7 +148,7 @@ bot.launch()
       }
 
       try {
-        await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await airgram.api.sendMessage({chatId: 1268417828, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
         await promiseSempreRicoTeste()
         console.log('DEU BOM TESTE SEMPRE RICO')
       } catch (err) {
