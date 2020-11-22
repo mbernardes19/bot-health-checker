@@ -60,6 +60,7 @@ void (async function () {
   let messageTraderInfalivelAnswered = false;
   let messageWinOuWinAnswered = false;
   let messageSempreRicoTestAnswered = false;
+  let messageSempreRicoFreeAnswered = false;
 
   bot.command('mti', async ctx => {
     try {
@@ -100,6 +101,19 @@ bot.command('ww', async ctx => {
         console.log('Erro ao reviver Win ou Win MANUALMENTE', err)
     }
 })
+
+bot.command('msrf', async ctx => {
+    try {
+        console.log('Revivendo Sempre Rico Gratuito MANUALMENTE')
+        await axios.get('http://bot.sosvestibular.com/HealthGratuito/revive')
+        await ctx.reply('Sempre Rico Gratuito reviveu MANUALMENTE')
+        console.log('Sempre Rico Gratuito reviveu MANUALMENTE')
+    } catch (err) {
+        await ctx.reply('Sempre Rico Gratuito não conseguiu reviver MANUALMENTE')
+        console.log('Erro ao reviver Sempre Rico Gratuito MANUALMENTE', err)
+    }
+})
+
 
 bot.launch()
 
@@ -143,6 +157,26 @@ bot.launch()
             } catch (err) {
                 await bot.telegram.sendMessage(721557882, 'Sempre Rico não conseguiu reviver')
                 console.log('Erro ao reviver Sempre Rico', err)
+            }
+        }
+      }
+
+      try {
+        await airgram.api.sendMessage({chatId: 1491828853, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRicoGratuito()
+        console.log('DEU BOM SEMPRE RICO GRATUITO')
+      } catch (err) {
+        if (!messageSempreRicoAnswered) {
+            await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não respondendo')
+            console.log('DEU RUIM SEMPRE RICO GRATUITO')
+            try {
+                console.log('Revivendo Sempre Rico Gratuito')
+                await axios.get('http://bot.sosvestibular.com/HealthGratuito/revive')
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito reviveu')
+                console.log('Sempre Rico Gratuito reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não conseguiu reviver')
+                console.log('Erro ao reviver Sempre Rico Gratuito', err)
             }
         }
       }
@@ -217,6 +251,18 @@ bot.launch()
         }, 10000)
     }));
 
+    const promiseSempreRicoGratuito = () => (new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('DENTRO DA PROMISE', messageSempreRicoFreeAnswered)
+            if (messageSempreRicoFreeAnswered) {
+                messageSempreRicoFreeAnswered = false
+                resolve()
+            } else {
+                reject()
+            }
+        }, 10000)
+    }));
+
     const promiseSempreRicoTeste = () => (new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('DENTRO DA PROMISE', messageSempreRicoTestAnswered)
@@ -251,6 +297,10 @@ airgram.on('updateNewMessage', (ctx, next) => {
         if (ctx.update.message.chatId == 1122807041 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE TRADER SEMPRE RICO')
             messageSempreRicoAnswered = true
+        }
+        if (ctx.update.message.chatId == 1491828853 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
+            console.log('RECEBENDO RESPOSTA DE TRADER SEMPRE RICO GRATUITO')
+            messageSempreRicoFreeAnswered = true
         }
         if (ctx.update.message.chatId == 1268417828 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE TESTE TRADER SEMPRE RICO')
