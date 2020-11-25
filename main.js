@@ -122,7 +122,7 @@ bot.launch()
 
       console.log('COMECOU A ENVIAR MENSAGENS')
       try {
-        await airgram.api.sendMessage({chatId: 980218936, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await airgram.api.sendMessage({chatId: 1478463075, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
         await promiseTraderInfalivel()
         console.log('DEU BOM TRADER INFALIVEL')
       } catch (err) {
@@ -290,7 +290,7 @@ bot.launch()
 
 airgram.on('updateNewMessage', (ctx, next) => {
     if (!ctx.update.message.isOutgoing) {
-        if (ctx.update.message.chatId == 980218936 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
+        if (ctx.update.message.chatId == 1478463075 && ctx.update.message.content._ === 'messageText' && ctx.update.message.content.text.text.startsWith('Olá, sou')) {
             console.log('RECEBENDO RESPOSTA DE TRADER INFALIVEL')
             messageTraderInfalivelAnswered = true
         }
