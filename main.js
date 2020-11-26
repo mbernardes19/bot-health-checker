@@ -77,7 +77,7 @@ void (async function () {
 bot.command('msr', async ctx => {
     try {
         console.log('Revivendo Sempre Rico MANUALMENTE')
-        await axios.get('http://bot.sosvestibular.com/Health/revive')
+        await axios.get('http://bot.sosvestibular.com//Health/revive')
         await ctx.reply('Sempre Rico reviveu MANUALMENTE')
         console.log('Sempre Rico reviveu MANUALMENTE')
     } catch (err) {
@@ -105,7 +105,7 @@ bot.command('ww', async ctx => {
 bot.command('msrf', async ctx => {
     try {
         console.log('Revivendo Sempre Rico Gratuito MANUALMENTE')
-        await axios.get('http://bot.sosvestibular.com/HealthGratuito/revive')
+        await axios.get('http://bot.sosvestibular.com//HealthGratuito/revive')
         await ctx.reply('Sempre Rico Gratuito reviveu MANUALMENTE')
         console.log('Sempre Rico Gratuito reviveu MANUALMENTE')
     } catch (err) {
@@ -151,7 +151,7 @@ bot.launch()
             console.log('DEU RUIM SEMPRE RICO')
             try {
                 console.log('Revivendo Sempre Rico')
-                await axios.get('http://bot.sosvestibular.com/Health/revive')
+                await axios.get('http://bot.sosvestibular.com//Health/revive')
                 await bot.telegram.sendMessage(721557882, 'Sempre Rico reviveu')
                 console.log('Sempre Rico reviveu')
             } catch (err) {
@@ -171,7 +171,7 @@ bot.launch()
             console.log('DEU RUIM SEMPRE RICO GRATUITO')
             try {
                 console.log('Revivendo Sempre Rico Gratuito')
-                await axios.get('http://bot.sosvestibular.com/HealthGratuito/revive')
+                await axios.get('http://bot.sosvestibular.com//HealthGratuito/revive')
                 await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito reviveu')
                 console.log('Sempre Rico Gratuito reviveu')
             } catch (err) {
@@ -191,7 +191,7 @@ bot.launch()
             console.log('DEU RUIM TESTE SEMPRE RICO')
             try {
                 console.log('Revivendo Teste Sempre Rico')
-                await axios.get('http://bot.sosvestibular.com/HealthTeste/revive')
+                await axios.get('http://bot.sosvestibular.com//HealthTeste/revive')
                 await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico reviveu')
                 console.log('Teste Sempre Rico reviveu')
             } catch (err) {
