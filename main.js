@@ -225,7 +225,7 @@ bot.launch()
             }
         }
       }
-    }, 180000)
+    }, 60000)
 
     const promiseTraderInfalivel = () => (new Promise((resolve, reject) => {
         setTimeout(() => {
