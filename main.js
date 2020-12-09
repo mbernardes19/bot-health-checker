@@ -116,31 +116,10 @@ bot.command('msrf', async ctx => {
 
 
 bot.launch()
+handleDisconnect();
 
   setInterval(async () => {
-      handleDisconnect();
-
-      console.log('COMECOU A ENVIAR MENSAGENS')
-      try {
-        await airgram.api.sendMessage({chatId: 1478463075, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-        await promiseTraderInfalivel()
-        console.log('DEU BOM TRADER INFALIVEL')
-      } catch (err) {
-        if (!messageTraderInfalivelAnswered) {
-            await bot.telegram.sendMessage(721557882, 'Trader Infalível não respondendo')
-            console.log('DEU RUIM TRADER INFALIVEL')
-            try {
-                console.log('Revivendo Trader Infalível')
-                await axios.get('http://metodotraderinfalivel.kinghost.net:21571/revive')
-                await bot.telegram.sendMessage(721557882, 'Trader Infalível reviveu')
-                console.log('Trader Infalível reviveu')
-            } catch (err) {
-                await bot.telegram.sendMessage(721557882, 'Trader Infalível não conseguiu reviver')
-                console.log('Erro ao reviver Trader Infalível', err)
-            }
-        }
-      }
-
+      console.log('COMECOU A ENVIAR MENSAGENS SEMPRE RICO')
       try {
         await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
         await promiseSempreRico()
@@ -157,26 +136,6 @@ bot.launch()
             } catch (err) {
                 await bot.telegram.sendMessage(721557882, 'Sempre Rico não conseguiu reviver')
                 console.log('Erro ao reviver Sempre Rico', err)
-            }
-        }
-      }
-
-      try {
-        await airgram.api.sendMessage({chatId: 1491828853, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-        await promiseSempreRicoGratuito()
-        console.log('DEU BOM SEMPRE RICO GRATUITO')
-      } catch (err) {
-        if (!messageSempreRicoAnswered) {
-            await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não respondendo')
-            console.log('DEU RUIM SEMPRE RICO GRATUITO')
-            try {
-                console.log('Revivendo Sempre Rico Gratuito')
-                await axios.get('http://bot.sosvestibular.com/HealthGratuito/revive')
-                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito reviveu')
-                console.log('Sempre Rico Gratuito reviveu')
-            } catch (err) {
-                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não conseguiu reviver')
-                console.log('Erro ao reviver Sempre Rico Gratuito', err)
             }
         }
       }
@@ -201,31 +160,75 @@ bot.launch()
         }
       }
 
-      let url;
       try {
-        const query = util.promisify(connection.query).bind(connection)
-        const [response] = await query(`select url from URLs where id=1`);
-        url = response.url
-        console.log(url)
-        await airgram.api.sendMessage({chatId: 1282624834, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-        await promiseWinOuWin()
-        console.log('DEU BOM WIN OU WIN')
+        await airgram.api.sendMessage({chatId: 1491828853, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRicoGratuito()
+        console.log('DEU BOM SEMPRE RICO GRATUITO')
       } catch (err) {
-        if (!messageWinOuWinAnswered) {
-            await bot.telegram.sendMessage(721557882, 'Win Ou Win não respondendo')
-            console.log('DEU RUIM WIN OU WIN')
+        if (!messageSempreRicoAnswered) {
+            await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não respondendo')
+            console.log('DEU RUIM SEMPRE RICO GRATUITO')
             try {
-                console.log('Revivendo Win ou Win')
-                await axios.get(`${url}/revive`)
-                await bot.telegram.sendMessage(721557882, 'Win ou Win reviveu')
-                console.log('Win ou Win reviveu')
+                console.log('Revivendo Sempre Rico Gratuito')
+                await axios.get('http://bot.sosvestibular.com/HealthGratuito/revive')
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito reviveu')
+                console.log('Sempre Rico Gratuito reviveu')
             } catch (err) {
-                await bot.telegram.sendMessage(721557882, 'Win ou Win não conseguiu reviver')
-                console.log('Erro ao reviver Win ou Win', err)
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não conseguiu reviver')
+                console.log('Erro ao reviver Sempre Rico Gratuito', err)
             }
         }
       }
     }, 60000)
+
+    setInterval(async () => {
+        console.log('COMECOU A ENVIAR MENSAGENS OUTROS')
+
+        try {
+            await airgram.api.sendMessage({chatId: 1478463075, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+            await promiseTraderInfalivel()
+            console.log('DEU BOM TRADER INFALIVEL')
+          } catch (err) {
+            if (!messageTraderInfalivelAnswered) {
+                await bot.telegram.sendMessage(721557882, 'Trader Infalível não respondendo')
+                console.log('DEU RUIM TRADER INFALIVEL')
+                try {
+                    console.log('Revivendo Trader Infalível')
+                    await axios.get('http://metodotraderinfalivel.kinghost.net:21571/revive')
+                    await bot.telegram.sendMessage(721557882, 'Trader Infalível reviveu')
+                    console.log('Trader Infalível reviveu')
+                } catch (err) {
+                    await bot.telegram.sendMessage(721557882, 'Trader Infalível não conseguiu reviver')
+                    console.log('Erro ao reviver Trader Infalível', err)
+                }
+            }
+          }
+    
+          let url;
+          try {
+            const query = util.promisify(connection.query).bind(connection)
+            const [response] = await query(`select url from URLs where id=1`);
+            url = response.url
+            console.log(url)
+            await airgram.api.sendMessage({chatId: 1282624834, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+            await promiseWinOuWin()
+            console.log('DEU BOM WIN OU WIN')
+          } catch (err) {
+            if (!messageWinOuWinAnswered) {
+                await bot.telegram.sendMessage(721557882, 'Win Ou Win não respondendo')
+                console.log('DEU RUIM WIN OU WIN')
+                try {
+                    console.log('Revivendo Win ou Win')
+                    await axios.get(`${url}/revive`)
+                    await bot.telegram.sendMessage(721557882, 'Win ou Win reviveu')
+                    console.log('Win ou Win reviveu')
+                } catch (err) {
+                    await bot.telegram.sendMessage(721557882, 'Win ou Win não conseguiu reviver')
+                    console.log('Erro ao reviver Win ou Win', err)
+                }
+            }
+          }
+    }, 180000)
 
     const promiseTraderInfalivel = () => (new Promise((resolve, reject) => {
         setTimeout(() => {
