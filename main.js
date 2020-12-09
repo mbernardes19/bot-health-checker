@@ -236,7 +236,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 10000)
+        }, 5000)
     }));
     
     const promiseSempreRico = () => (new Promise((resolve, reject) => {
@@ -248,7 +248,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 10000)
+        }, 5000)
     }));
 
     const promiseSempreRicoGratuito = () => (new Promise((resolve, reject) => {
@@ -260,7 +260,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 10000)
+        }, 5000)
     }));
 
     const promiseSempreRicoTeste = () => (new Promise((resolve, reject) => {
@@ -272,7 +272,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 10000)
+        }, 5000)
     }));
 
     const promiseWinOuWin = () => (new Promise((resolve, reject) => {
@@ -284,7 +284,7 @@ bot.launch()
             } else {
                 reject()
             }
-        }, 10000)
+        }, 5000)
     }));
 
 
