@@ -20,32 +20,13 @@ airgram.use(new Auth({
   phoneNumber: () => prompt('Insira por favor seu telefone no formato internacional:')
 }))
 
-let connection;
-
-function handleDisconnect() {
-    connection = mysql.createConnection({
-        host: process.env.DB_HOST,
-        database: process.env.DB_DATABASE,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        dateStrings: true
-    })
-
-    connection.connect(function(err) {             
-      if(err) {                                     
-        console.log('error when connecting to db:', err);
-        setTimeout(handleDisconnect, 2000); 
-      }                                    
-    });                                     
-                                            
-    connection.on('error', function(err) {
-      if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
-        handleDisconnect();                         
-      } else {                                      
-        throw err;                                  
-      }
-    });
-  }
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    dateStrings: true,
+}).promise()
 
 void (async function () {
     const { response: chats } = await airgram.api.getChats({
@@ -87,9 +68,8 @@ bot.command('msr', async ctx => {
 })
 
 bot.command('ww', async ctx => {
-    const query = util.promisify(connection.query).bind(connection)
-    const [response] = await query(`select url from URLs where id=1`);
-    const url = response.url
+    const [rows, fields] = await pool.query(`select url from URLs where id=1`);
+    const url = rows[0].url;
     console.log(url)
     try {
         console.log('Revivendo Win ou Win MANUALMENTE')
@@ -114,9 +94,7 @@ bot.command('msrf', async ctx => {
     }
 })
 
-
 bot.launch()
-handleDisconnect();
 
   setInterval(async () => {
       console.log('COMECOU A ENVIAR MENSAGENS SEMPRE RICO')
@@ -206,9 +184,8 @@ handleDisconnect();
     
           let url;
           try {
-            const query = util.promisify(connection.query).bind(connection)
-            const [response] = await query(`select url from URLs where id=1`);
-            url = response.url
+            const [rows, fields] = await pool.query(`select url from URLs where id=1`);
+            const url = rows[0].url;
             console.log(url)
             await airgram.api.sendMessage({chatId: 1282624834, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
             await promiseWinOuWin()
