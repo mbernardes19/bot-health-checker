@@ -214,6 +214,7 @@ handleDisconnect();
             await promiseWinOuWin()
             console.log('DEU BOM WIN OU WIN')
           } catch (err) {
+              console.log(err)
             if (!messageWinOuWinAnswered) {
                 await bot.telegram.sendMessage(721557882, 'Win Ou Win não respondendo')
                 console.log('DEU RUIM WIN OU WIN')
