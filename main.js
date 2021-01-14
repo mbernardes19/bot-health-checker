@@ -118,25 +118,25 @@ bot.launch()
         }
       }
 
-    //   try {
-    //     await airgram.api.sendMessage({chatId: 1268417828, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-    //     await promiseSempreRicoTeste()
-    //     console.log('DEU BOM TESTE SEMPRE RICO')
-    //   } catch (err) {
-    //     if (!messageSempreRicoAnswered) {
-    //         await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico não respondendo')
-    //         console.log('DEU RUIM TESTE SEMPRE RICO')
-    //         try {
-    //             console.log('Revivendo Teste Sempre Rico')
-    //             await axios.get('http://bot.sosvestibular.com//HealthTeste/revive')
-    //             await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico reviveu')
-    //             console.log('Teste Sempre Rico reviveu')
-    //         } catch (err) {
-    //             await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico não conseguiu reviver')
-    //             console.log('Erro ao reviver Teste Sempre Rico', err)
-    //         }
-    //     }
-    //   }
+      try {
+        await airgram.api.sendMessage({chatId: 1268417828, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRicoTeste()
+        console.log('DEU BOM TESTE SEMPRE RICO')
+      } catch (err) {
+        if (!messageSempreRicoAnswered) {
+            await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico não respondendo')
+            console.log('DEU RUIM TESTE SEMPRE RICO')
+            try {
+                console.log('Revivendo Teste Sempre Rico')
+                await axios.get('http://bot.sosvestibular.com//HealthTeste/revive')
+                await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico reviveu')
+                console.log('Teste Sempre Rico reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Teste Sempre Rico não conseguiu reviver')
+                console.log('Erro ao reviver Teste Sempre Rico', err)
+            }
+        }
+      }
 
       try {
         await airgram.api.sendMessage({chatId: 1491828853, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
