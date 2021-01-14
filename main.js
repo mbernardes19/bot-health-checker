@@ -98,25 +98,25 @@ bot.launch()
 
   setInterval(async () => {
       console.log('COMECOU A ENVIAR MENSAGENS SEMPRE RICO')
-    //   try {
-    //     await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-    //     await promiseSempreRico()
-    //     console.log('DEU BOM SEMPRE RICO')
-    //   } catch (err) {
-    //     if (!messageSempreRicoAnswered) {
-    //         await bot.telegram.sendMessage(721557882, 'Sempre Rico não respondendo')
-    //         console.log('DEU RUIM SEMPRE RICO')
-    //         try {
-    //             console.log('Revivendo Sempre Rico')
-    //             await axios.get('http://bot.sosvestibular.com//Health/revive')
-    //             await bot.telegram.sendMessage(721557882, 'Sempre Rico reviveu')
-    //             console.log('Sempre Rico reviveu')
-    //         } catch (err) {
-    //             await bot.telegram.sendMessage(721557882, 'Sempre Rico não conseguiu reviver')
-    //             console.log('Erro ao reviver Sempre Rico', err)
-    //         }
-    //     }
-    //   }
+      try {
+        await airgram.api.sendMessage({chatId: 1122807041, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRico()
+        console.log('DEU BOM SEMPRE RICO')
+      } catch (err) {
+        if (!messageSempreRicoAnswered) {
+            await bot.telegram.sendMessage(721557882, 'Sempre Rico não respondendo')
+            console.log('DEU RUIM SEMPRE RICO')
+            try {
+                console.log('Revivendo Sempre Rico')
+                await axios.get('http://bot.sosvestibular.com//Health/revive')
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico reviveu')
+                console.log('Sempre Rico reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico não conseguiu reviver')
+                console.log('Erro ao reviver Sempre Rico', err)
+            }
+        }
+      }
 
     //   try {
     //     await airgram.api.sendMessage({chatId: 1268417828, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
@@ -138,25 +138,25 @@ bot.launch()
     //     }
     //   }
 
-    //   try {
-    //     await airgram.api.sendMessage({chatId: 1491828853, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
-    //     await promiseSempreRicoGratuito()
-    //     console.log('DEU BOM SEMPRE RICO GRATUITO')
-    //   } catch (err) {
-    //     if (!messageSempreRicoAnswered) {
-    //         await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não respondendo')
-    //         console.log('DEU RUIM SEMPRE RICO GRATUITO')
-    //         try {
-    //             console.log('Revivendo Sempre Rico Gratuito')
-    //             await axios.get('http://bot.sosvestibular.com//HealthGratuito/revive')
-    //             await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito reviveu')
-    //             console.log('Sempre Rico Gratuito reviveu')
-    //         } catch (err) {
-    //             await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não conseguiu reviver')
-    //             console.log('Erro ao reviver Sempre Rico Gratuito', err)
-    //         }
-    //     }
-    //   }
+      try {
+        await airgram.api.sendMessage({chatId: 1491828853, inputMessageContent: {_: 'inputMessageText', text: {_: 'formattedText', text: 'Oi'} }})
+        await promiseSempreRicoGratuito()
+        console.log('DEU BOM SEMPRE RICO GRATUITO')
+      } catch (err) {
+        if (!messageSempreRicoAnswered) {
+            await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não respondendo')
+            console.log('DEU RUIM SEMPRE RICO GRATUITO')
+            try {
+                console.log('Revivendo Sempre Rico Gratuito')
+                await axios.get('http://bot.sosvestibular.com//HealthGratuito/revive')
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito reviveu')
+                console.log('Sempre Rico Gratuito reviveu')
+            } catch (err) {
+                await bot.telegram.sendMessage(721557882, 'Sempre Rico Gratuito não conseguiu reviver')
+                console.log('Erro ao reviver Sempre Rico Gratuito', err)
+            }
+        }
+      }
     }, 60000)
 
     setInterval(async () => {
